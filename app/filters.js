@@ -22,7 +22,8 @@ export function defaultState() {
 function matches(deal, state) {
   if (state.category !== 'all' && deal.category !== state.category) return false;
   if (state.store !== 'all' && deal.store !== state.store) return false;
-  if (discountPct(deal) < state.minPct) return false;
+  const minPct = Math.min(100, Math.max(0, Number(state.minPct) || 0));
+  if (discountPct(deal) < minPct) return false;
   if (state.q) {
     const needle = state.q.trim().toLowerCase();
     const hay = `${deal.name} ${deal.brand} ${deal.category} ${deal.store}`.toLowerCase();
