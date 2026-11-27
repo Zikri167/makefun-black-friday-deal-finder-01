@@ -381,6 +381,7 @@ export function formatPrice(n) {
 
 export function formatChecked(iso) {
   const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
   const day = d.getUTCDate();
   const month = d.toLocaleString('en-US', { month: 'short', timeZone: 'UTC' });
   const hh = String(d.getUTCHours()).padStart(2, '0');
